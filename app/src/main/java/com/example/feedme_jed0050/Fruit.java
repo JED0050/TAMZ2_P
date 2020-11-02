@@ -20,7 +20,7 @@ public class Fruit {
         skin = skins[0];
     }
 
-    public void Contact(Player p) {
+    public boolean Contact(Player p) {
         if (x < p.x + 32 && x + 64 > p.x && y < p.y + 32 && y + 64 > p.y)
         {
             int rX = ThreadLocalRandom.current().nextInt(50, 500 + 1);
@@ -30,6 +30,10 @@ public class Fruit {
             x = rX;
             y = rY;
             skin = skins[rS];
+
+            return true;
         }
+
+        return false;
     }
 }
