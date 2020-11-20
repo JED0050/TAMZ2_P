@@ -11,21 +11,41 @@ public class Fruit {
     public Bitmap skin;
     public Bitmap[] skins;
 
-    public Fruit(int xPos, int yPos, Bitmap[] fruitSkins)
+    private int xMax;
+    private int yMax;
+
+    public Fruit(int xPos, int yPos, Bitmap[] fruitSkins, int xM, int yM)
     {
         x = xPos;
         y = yPos;
         skins = fruitSkins;
 
         skin = skins[0];
+
+        xMax = xM;
+        yMax = yM;
     }
 
     public boolean Contact(Player p) {
-        if (x < p.x + 32 && x + 64 > p.x && y < p.y + 32 && y + 64 > p.y)
+
+        //if (x < p.x + 32 && x + 64 > p.x && y < p.y + 32 && y + 64 > p.y)
+
+        if (x <= p.x  && x + 100 >= p.x && y <= p.y  && y + 100 >= p.y)
         {
-            int rX = ThreadLocalRandom.current().nextInt(50, 500 + 1);
-            int rY = ThreadLocalRandom.current().nextInt(50, 500 + 1);
+            int rX; // = ThreadLocalRandom.current().nextInt(50, xMax + 1 - 50);
+            int rY; // = ThreadLocalRandom.current().nextInt(50, yMax + 1 - 50);
             int rS = ThreadLocalRandom.current().nextInt(0, 3 + 1);
+
+            double distance = 0;
+
+            do {
+
+                rX = ThreadLocalRandom.current().nextInt(50, xMax + 1 - 100);
+                rY = ThreadLocalRandom.current().nextInt(50, yMax + 1 - 200);
+
+                distance = Math.sqrt((rX - x)*(rX - x) + (rY - y)*(rY - y));
+
+            }while(distance < 100);
 
             x = rX;
             y = rY;

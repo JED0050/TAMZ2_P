@@ -92,7 +92,37 @@ public class ScoreDB extends AppCompatActivity {
             return new String[] {""};
         }
 
-        return lines;
+        if(lines.length < 10)
+        {
+            return lines;
+        }
+        else
+        {
+            String[] newLines = new String[10];
+
+            for(int i = 0; i < 10; i++)
+            {
+                newLines[i] = lines[i];
+            }
+
+            return  newLines;
+        }
+
+    }
+
+    public int getBestScore() {
+        String[] lines = loadData();
+
+        if (lines.length == 0 || (lines.length == 1 && lines[0].length() == 0))
+        {
+            return 0;
+        }
+        else
+        {
+            int bestScore = Integer.parseInt(lines[0].split(" ")[0]);
+
+            return bestScore;
+        }
     }
 
     public void deleteScores()
