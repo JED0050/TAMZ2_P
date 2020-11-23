@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.icu.number.Precision;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Calendar;
@@ -29,20 +31,25 @@ public class GameView extends View {
 
     private Player player;
     private Fruit fruit;
+    private RottenFruit rottenFruit;
     private Paint pointPaint;
 
     private int points = 0;
     private Date currentTime = Calendar.getInstance().getTime();
+    private Date rottenFruitTime = Calendar.getInstance().getTime();
     private Timer timer;
     private ScoreDB scoreDB;
     private boolean playerDied = false;
 
     private Bitmap[] fruits;
+    private Bitmap[] rottenFruits;
 
     private int disW = Resources.getSystem().getDisplayMetrics().widthPixels;
     private int disH = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     private float x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+
+    private double LEVEL_TIME = 5;
 
     //private Button resetButton;
 
@@ -64,17 +71,17 @@ public class GameView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(Color.BLUE);
+        canvas.drawColor(0xff33f6ff);
 
         Date now = Calendar.getInstance().getTime();
-        double dif = (now.getTime() - currentTime.getTime()) / 1000;
-        //Log.d("time", "t: " + now);
+        double dif = (now.getTime() - currentTime.getTime()) / 1000.0;
+        //Log.d("time", "t: " + (now.getTime() / 1000.0 - currentTime.getTime() / 1000.0));
 
-        if(player.x <= 0 || player.x - 32 >= disW || player.y <= 0 || player.y - 32 >= disH || dif >= 5)
+        if(player.x <= 0 || player.x + 80 >= disW || player.y <= 0 || player.y + 300 >= disH || dif >= LEVEL_TIME || rottenFruit.Contact(player))
         {
             //you lose
-            canvas.drawText("GAME OVER!!!", disW/2 - 50,disH/2 - 30,pointPaint);
-            canvas.drawText("SCORE: " + points, disW/2 - 20,disH/2 + 30,pointPaint);
+            canvas.drawText("GAME OVER!!!", disW/2 - 150,disH/2 - 200,pointPaint);
+            canvas.drawText("SCORE: " + points, disW/2 - 90,disH/2 - 140,pointPaint);
 
             if(!playerDied)
             {
@@ -95,19 +102,33 @@ public class GameView extends View {
             {
                 points++;
                 currentTime = Calendar.getInstance().getTime();
+
+                if(points % 5 == 0)
+                {
+                    rottenFruitTime = Calendar.getInstance().getTime();
+                    rottenFruit.Spawn(player);
+                }
+            }
+
+            if(rottenFruit.spawned)
+            {
+                canvas.drawBitmap(rottenFruit.skin, rottenFruit.x, rottenFruit.y, null);
+
+                if((now.getTime() - rottenFruitTime.getTime()) / 1000.0 >= LEVEL_TIME)
+                {
+                    rottenFruit.Despawn();
+                }
             }
 
             canvas.drawBitmap(player.skin, player.x, player.y, null);
             canvas.drawBitmap(fruit.skin, fruit.x, fruit.y, null);
-            canvas.drawText("Score: " + points + " Time: " + (5 - dif), disW/2 - 20,50,pointPaint);
+
+            String formatedTime = String.format("%.2f", LEVEL_TIME - dif);
+            canvas.drawText("Score: " + points + " Time: " + formatedTime, disW/2 - 20,50,pointPaint);
         }
     }
 
     void init(Context context) {
-
-        //resetButton = (Button)findViewById(R.id.buttonReset);
-        //resetButton.callOnClick();
-        //resetButton.setVisibility(View.GONE);
 
         SkinDB skinDB = new SkinDB(context);
 
@@ -134,8 +155,12 @@ public class GameView extends View {
                 BitmapFactory.decodeResource(getResources(), R.drawable.f2),
                 BitmapFactory.decodeResource(getResources(), R.drawable.f3)};
 
+        rottenFruits = new Bitmap[] {BitmapFactory.decodeResource(getResources(), R.drawable.rf0),
+                BitmapFactory.decodeResource(getResources(), R.drawable.rf1)};
+
         player = new Player(100,100,bPlayer, 25);
-        fruit = new Fruit(200,200,fruits, disW, disH);
+        fruit = new Fruit(disW/2 - 100,disH/2 - 200,fruits, disW, disH);
+        rottenFruit = new RottenFruit(disW/2 - 100,disH/2 - 200,rottenFruits, disW, disH);
 
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask(){
@@ -145,7 +170,7 @@ public class GameView extends View {
         }, 0, 50L);
 
         pointPaint = new Paint();
-        pointPaint.setColor(Color.WHITE);
+        pointPaint.setColor(Color.BLACK);
         pointPaint.setTextSize(50);
 
         scoreDB = new ScoreDB(context);

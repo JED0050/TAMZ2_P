@@ -24,6 +24,7 @@ public class Fruit {
 
         xMax = xM;
         yMax = yM;
+
     }
 
     public boolean Contact(Player p) {
@@ -40,12 +41,12 @@ public class Fruit {
 
             do {
 
-                rX = ThreadLocalRandom.current().nextInt(50, xMax + 1 - 100);
-                rY = ThreadLocalRandom.current().nextInt(50, yMax + 1 - 200);
+                rX = ThreadLocalRandom.current().nextInt(50, xMax + 1 - 200);
+                rY = ThreadLocalRandom.current().nextInt(50, yMax + 1 - 400);
 
                 distance = Math.sqrt((rX - x)*(rX - x) + (rY - y)*(rY - y));
 
-            }while(distance < 100);
+            }while(distance < 500);
 
             x = rX;
             y = rY;
