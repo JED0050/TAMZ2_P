@@ -92,15 +92,17 @@ public class ScoreDB extends AppCompatActivity {
             return new String[] {""};
         }
 
-        if(lines.length < 10)
+        int numberOfMaxScores = 30;
+
+        if(lines.length < numberOfMaxScores)
         {
             return lines;
         }
         else
         {
-            String[] newLines = new String[10];
+            String[] newLines = new String[numberOfMaxScores];
 
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < numberOfMaxScores; i++)
             {
                 newLines[i] = lines[i];
             }
