@@ -4,29 +4,17 @@ import android.graphics.Bitmap;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RottenFruit {
-    public int x;
-    public int y;
-    public Bitmap skin;
-    public Bitmap[] skins;
+public class RottenFruit extends Fruit {
+
     public boolean spawned;
 
-    private int xMax;
-    private int yMax;
-
     public RottenFruit(int xPos, int yPos, Bitmap[] fruitSkins, int xM, int yM) {
-        x = xPos;
-        y = yPos;
-        skins = fruitSkins;
-
-        skin = skins[0];
-
-        xMax = xM;
-        yMax = yM;
+        super(xPos, yPos, fruitSkins, xM, yM);
 
         spawned = false;
     }
 
+    @Override
     public boolean Contact(Player p) {
 
         //if (x < p.x + 32 && x + 64 > p.x && y < p.y + 32 && y + 64 > p.y)
@@ -41,7 +29,7 @@ public class RottenFruit {
     public void Spawn(Player p) {
         int rX; // = ThreadLocalRandom.current().nextInt(50, xMax + 1 - 50);
         int rY; // = ThreadLocalRandom.current().nextInt(50, yMax + 1 - 50);
-        int rS = ThreadLocalRandom.current().nextInt(0, 1 + 1);
+        int rS = ThreadLocalRandom.current().nextInt(0, skins.length);
 
         double distance = 0;
 
@@ -50,7 +38,7 @@ public class RottenFruit {
             rX = ThreadLocalRandom.current().nextInt(50, xMax + 1 - 200);
             rY = ThreadLocalRandom.current().nextInt(50, yMax + 1 - 400);
 
-            distance = Math.sqrt((rX - x) * (rX - x) + (rY - y) * (rY - y));
+            distance = Math.sqrt((rX - p.x) * (rX - p.x) + (rY - p.y) * (rY - p.y));
 
         } while (distance < 500);
 

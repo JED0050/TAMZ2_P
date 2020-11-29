@@ -94,7 +94,7 @@ public class ScoreDB extends AppCompatActivity {
 
         int numberOfMaxScores = 30;
 
-        if(lines.length < numberOfMaxScores)
+        if(lines.length <= numberOfMaxScores)
         {
             return lines;
         }

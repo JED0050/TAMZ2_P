@@ -4,6 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityHowToPlay">
+    tools:context=".ActivityHowToPlay"
+    android:background="@color/myBGCol">
 
+    <ImageView
+        android:id="@+id/iVH2P"
+        android:layout_width="729dp"
+        android:layout_height="575dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/h2p0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

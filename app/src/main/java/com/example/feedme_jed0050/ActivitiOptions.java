@@ -22,7 +22,7 @@ public class ActivitiOptions extends AppCompatActivity {
 
     public void setYellowSkin(View view) {
 
-        String msg = "Žlutý skin byl nastaven!";
+        String msg = "Yellow skin has been set!";
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
         skinDB.saveData("yellow");
@@ -35,12 +35,12 @@ public class ActivitiOptions extends AppCompatActivity {
 
         if (maxScore < 15)
         {
-            String msg = "Modrý skin nelze nastavit! Musíš mít minimálně 15 bodů!";
+            String msg = "Blue skin can't be set! You must have at least 15 points!";
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
         else
         {
-            String msg = "Modrý skin byl nastaven!";
+            String msg = "Blue skin has been set!";
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
             skinDB.saveData("blue");
@@ -54,12 +54,12 @@ public class ActivitiOptions extends AppCompatActivity {
 
         if (maxScore < 30)
         {
-            String msg = "Červený skin nelze nastavit! Musíš mít minimálně 30 bodů!";
+            String msg = "Red skin can't be set! You must have at least 30 points!";
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         }
         else
         {
-            String msg = "Červený skin byl nastaven!";
+            String msg = "Red skin has been set!";
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
 
             skinDB.saveData("red");

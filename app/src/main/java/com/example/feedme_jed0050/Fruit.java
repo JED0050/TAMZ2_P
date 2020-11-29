@@ -11,8 +11,8 @@ public class Fruit {
     public Bitmap skin;
     public Bitmap[] skins;
 
-    private int xMax;
-    private int yMax;
+    protected int xMax;
+    protected int yMax;
 
     public Fruit(int xPos, int yPos, Bitmap[] fruitSkins, int xM, int yM)
     {
@@ -35,7 +35,7 @@ public class Fruit {
         {
             int rX; // = ThreadLocalRandom.current().nextInt(50, xMax + 1 - 50);
             int rY; // = ThreadLocalRandom.current().nextInt(50, yMax + 1 - 50);
-            int rS = ThreadLocalRandom.current().nextInt(0, 3 + 1);
+            int rS = ThreadLocalRandom.current().nextInt(0, skins.length);
 
             double distance = 0;
 
