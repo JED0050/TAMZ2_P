@@ -18,12 +18,10 @@ public class RottenFruit extends Fruit {
     public boolean Contact(Player p) {
 
         //if (x < p.x + 32 && x + 64 > p.x && y < p.y + 32 && y + 64 > p.y)
+        //if (spawned && x <= p.x && x + 100 >= p.x && y <= p.y && y + 100 >= p.y)
 
-        if (spawned && x <= p.x && x + 100 >= p.x && y <= p.y && y + 100 >= p.y) {
-            return true;
-        }
+        return (spawned && x <= p.x && x + skin.getWidth() >= p.x && y <= p.y && y + skin.getHeight() >= p.y);
 
-        return false;
     }
 
     public void Spawn(Player p) {

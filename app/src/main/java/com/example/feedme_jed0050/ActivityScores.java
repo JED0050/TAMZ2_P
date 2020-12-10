@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 public class ActivityScores extends AppCompatActivity {
 
-    private TextView textScores;
     private ListView lWScores;
     private String[] scores;
 

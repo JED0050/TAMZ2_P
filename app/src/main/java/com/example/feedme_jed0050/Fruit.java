@@ -30,8 +30,9 @@ public class Fruit {
     public boolean Contact(Player p) {
 
         //if (x < p.x + 32 && x + 64 > p.x && y < p.y + 32 && y + 64 > p.y)
+        //if (x <= p.x  && x + 100 >= p.x && y <= p.y  && y + 100 >= p.y)
 
-        if (x <= p.x  && x + 100 >= p.x && y <= p.y  && y + 100 >= p.y)
+        if (x <= p.x  && x + skin.getWidth() >= p.x && y <= p.y  && y + skin.getHeight() >= p.y)
         {
             int rX; // = ThreadLocalRandom.current().nextInt(50, xMax + 1 - 50);
             int rY; // = ThreadLocalRandom.current().nextInt(50, yMax + 1 - 50);
