@@ -7,8 +7,8 @@ Součástí hry je menu, kde si hráč vybírá skin (skiny se odemykají získ�
 Výsledek:
 Aplikace má úspěšně implementovány veškeré věci, které jsou zmíněny výše. Ukládání dat o zvoleném skinu a skóre do SharedPreferences. Akce pro hlavní menu, zobrazení nejvyššího skóre, zvolení skinu, zobrazení návodu na hraní a hrací plochu samotnou.
 
-Kelvin Videa k projektu:
-Video 1
+## Kelvin Videa k projektu:
+### Video 1
 - ukázka kompletní hry po dohrání
 - hráč má odemklé všechny skiny a může je libovolně měnit
 - ukázka hlavního menu
@@ -17,7 +17,9 @@ Video 1
 - ukázka výběru skinů
 - ukázka hracího pole -> restart, smrt (kolize se stěnou, kolize se shnilým jídlem, vypršení limitu), jezení (navýšení score a nastavení limitu na 5s)
 
-Video 2
+https://github.com/user-attachments/assets/2dd4c9a6-e523-40e4-9f3d-05cc3dbf18d3
+
+### Video 2
 - ukázka hry po prvním spuštění
 - hráč nemá odemklé žádné skiny -> musí nahrát minimální skóre aby si skiny odemknul
 - pokus o zvolení jiných skinů bez dostatečného skóre, skin nezvolen protože hráč musí minimální skóre alespoň jendou nahrát
@@ -25,3 +27,5 @@ Video 2
 - skóre přičteno do DB a zobrazeno v High Scores
 - modrý skin úspěšně zlovel
 - ukázka změněné ikony aplikace
+
+https://github.com/user-attachments/assets/7f0369e4-8ac4-406e-b66f-aba200866ace
